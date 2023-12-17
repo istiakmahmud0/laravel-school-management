@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::group(['prefix' => 'admin-dashboard'], function () {
+Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('roles', RoleController::class)->names('admin.roles');
+    Route::resource('permissions', PermissionController::class)->names('admin.permissions');
 });
 
 
