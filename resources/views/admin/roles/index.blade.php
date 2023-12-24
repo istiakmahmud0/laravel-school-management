@@ -1,4 +1,5 @@
 <x-admin-layout>
+    <x-slot name='siteTitle'>Roles</x-slot>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
