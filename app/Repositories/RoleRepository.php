@@ -23,4 +23,12 @@ class RoleRepository implements RoleRepositoryInterface
     {
         return $this->model->all();
     }
+
+    /**
+     * Create new roles
+     */
+    public function createNewRoles(array $roleDetails): Role
+    {
+        return $this->model->create($roleDetails);
+    }
 }

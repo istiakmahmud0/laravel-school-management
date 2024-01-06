@@ -24,7 +24,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-end">
-                            <h3 class="btn btn-primary">create</h3>
+                            <a href="{{ route('admin.roles.create') }}">
+                                <h3 class="btn btn-primary">create</h3>
+                            </a>
                         </div>
                         <div class="card">
                             <div class="card-header">

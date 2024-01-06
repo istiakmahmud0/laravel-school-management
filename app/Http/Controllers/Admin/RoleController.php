@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleRequest;
 use App\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class RoleController extends Controller
 {
@@ -31,15 +33,16 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $this->roleRepository->createNewRoles($request->validated());
+        return redirect(route('admin.roles.index'))->with('message', 'Roles has been created successfully');
     }
 
     /**

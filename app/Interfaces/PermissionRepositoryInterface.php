@@ -9,6 +9,5 @@ interface PermissionRepositoryInterface
     /**
      * Retrieve all the permission
      */
-
     public function getAllPermission(): Collection;
 }
