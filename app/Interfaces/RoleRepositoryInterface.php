@@ -16,4 +16,19 @@ interface RoleRepositoryInterface
      * Create new roles
      */
     public function createNewRoles(array $roleDetails): Role;
+
+    /**
+     * Find role by id
+     */
+    public function getCategoryByID(int $categoryId): Role;
+
+    /**
+     * Update role
+     */
+    public function updateCategory(object $category, array $newDetails): bool;
+
+    /**
+     * Delete category
+     */
+    public function deleteCategory(object $category): bool;
 }

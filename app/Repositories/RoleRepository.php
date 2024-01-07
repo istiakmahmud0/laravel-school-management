@@ -31,4 +31,28 @@ class RoleRepository implements RoleRepositoryInterface
     {
         return $this->model->create($roleDetails);
     }
+
+    /**
+     * Find category by id
+     */
+    public function getCategoryByID(int $categoryId): Role
+    {
+        return $this->model->findOrFail($categoryId);
+    }
+
+    /**
+     * Update role
+     */
+    public function updateCategory(object $category, array $newDetails): bool
+    {
+        return $category->update($newDetails);
+    }
+
+    /**
+     * Delete category
+     */
+    public function deleteCategory(object $category): bool
+    {
+        return $category->delete();
+    }
 }
