@@ -20,15 +20,15 @@ interface RoleRepositoryInterface
     /**
      * Find role by id
      */
-    public function getCategoryByID(int $categoryId): Role;
+    public function getRoleByID(int $RoleId): Role;
 
     /**
      * Update role
      */
-    public function updateCategory(object $category, array $newDetails): bool;
+    public function updateRole(object $Role, array $newDetails): bool;
 
     /**
-     * Delete category
+     * Delete Role
      */
-    public function deleteCategory(object $category): bool;
+    public function deleteRole(object $Role): bool;
 }

@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Roles</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
+                            <li class="breadcrumb-item active">Roles</li>
                         </ol>
                     </div>
                 </div>
@@ -50,11 +50,16 @@
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                        <a href="{{ route('admin.roles.edit', $role->id) }}"
+                                                            class="btn btn-primary">Edit</a>
                                                     </span>
                                                     <span>
-                                                        <form>
-                                                            <span class="btn btn-danger">Delete</span>
+                                                        <form method="POST"
+                                                            action="{{ route('admin.roles.destroy', $role->id) }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" type="submit"
+                                                                onclick="return confirm('Are you sure ?')">Delete</button>
                                                         </form>
                                                     </span>
                                                 </td>

@@ -7,6 +7,7 @@ use App\Http\Requests\RoleRequest;
 use App\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Spatie\Permission\Contracts\Role;
 
 class RoleController extends Controller
 {
@@ -58,15 +59,20 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = $this->roleRepository->getRoleByID($id);
+        return view('admin.roles.edit', ['role' => $role]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoleRequest $request, string $id)
     {
-        //
+        $role = $this->roleRepository->getRoleByID($id);
+        if ($role instanceof Role) {
+            $this->roleRepository->updateRole($role, $request->validated());
+        }
+        return redirect(route('admin.roles.index'));
     }
 
     /**
@@ -74,6 +80,10 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = $this->roleRepository->getRoleByID($id);
+        if ($role instanceof Role) {
+            $this->roleRepository->deleteRole($role);
+        }
+        return redirect(route('admin.roles.index'));
     }
 }
