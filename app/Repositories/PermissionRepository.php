@@ -24,4 +24,38 @@ class PermissionRepository implements PermissionRepositoryInterface
     {
         return $this->model->all();
     }
+
+    /**
+     * Create new permission
+     */
+    public function createNewPermission(array $permissionDetails): Permission
+    {
+        return $this->model->create($permissionDetails);
+    }
+
+    /**
+     * Find permission by it's ID
+     */
+    public function findPermissionById(int $permissionID): Permission
+    {
+        return $this->model->findOrFail($permissionID);
+    }
+
+    /**
+     * Update permission
+     */
+
+    public function updatePermission(object $permission, array $newDetails): bool
+    {
+        return $permission->update($newDetails);
+    }
+
+    /**
+     * Delete permission
+     */
+
+    public function deletePermission(object $permission): bool
+    {
+        return $permission->delete();
+    }
 }
