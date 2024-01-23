@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PermissionRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -36,9 +37,10 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        //
+        $this->permissionRepository->createNewPermission($request->validated());
+        return redirect(route('admin.permissions.index'));
     }
 
     /**
