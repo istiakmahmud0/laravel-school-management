@@ -50,11 +50,17 @@
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                        <a href="{{ route('admin.permissions.edit', $permission->id) }}"
+                                                            class="btn btn-primary">Edit</a>
                                                     </span>
                                                     <span>
-                                                        <form>
-                                                            <span class="btn btn-danger">Delete</span>
+                                                        <form method="post"
+                                                            action="{{ route('admin.permissions.destroy', $permission->id) }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger"
+                                                                onclick="return confirm('Are you sure ?.')"
+                                                                type="submit">Delete</button>
                                                         </form>
                                                     </span>
                                                 </td>

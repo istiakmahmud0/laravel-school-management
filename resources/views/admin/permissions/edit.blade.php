@@ -30,13 +30,14 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('admin.roles.store') }}" method="POST">
+                            <form action="{{ route('admin.permissions.update', $permission->id) }}" method="POST">
                                 @csrf
+                                @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Email address</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter roles" value="{{ old('name') }}">
+                                            placeholder="Enter roles" value="{{ $permission->name }}">
                                         <x-alert name='name' />
                                     </div>
                                 </div>

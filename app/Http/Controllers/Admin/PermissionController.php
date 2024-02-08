@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -40,7 +41,7 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request)
     {
         $this->permissionRepository->createNewPermission($request->validated());
-        return redirect(route('admin.permissions.index'));
+        return redirect(route('admin.permissions.index'))->with('message', 'Permission has been created successfully');
     }
 
     /**
@@ -56,15 +57,21 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permission = $this->permissionRepository->findPermissionById($id);
+        return view('admin.permissions.edit', ['permission' => $permission]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PermissionRequest $request, string $id)
     {
-        //
+        $permission = $this->permissionRepository->findPermissionById($id);
+        if ($permission instanceof Permission) {
+            $this->permissionRepository->updatePermission($permission, $request->validated());
+        }
+
+        return redirect(route('admin.permissions.index'))->with('message', 'Permission has been Updated successfully');
     }
 
     /**
@@ -72,6 +79,11 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $permission = $this->permissionRepository->findPermissionById($id);
+        if ($permission instanceof Permission) {
+            $this->permissionRepository->deletePermission($permission);
+        }
+
+        return redirect(route('admin.permissions.index'))->with('message', 'Permission has been deleted');
     }
 }
