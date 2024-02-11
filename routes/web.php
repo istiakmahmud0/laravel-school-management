@@ -20,6 +20,9 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('roles', RoleController::class)->names('admin.roles');
     Route::resource('permissions', PermissionController::class)->names('admin.permissions');
+    // Assign permission to role
+    Route::post('roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('admin.roles.permissions');
+    Route::delete('roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('admin.roles.permissions.revoke');
 });
 
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
 
 class RoleController extends Controller
@@ -14,9 +16,10 @@ class RoleController extends Controller
     /**
      * RoleController constructor
      */
-    public function __construct(protected RoleRepositoryInterface $roleRepository)
+    public function __construct(protected RoleRepositoryInterface $roleRepository, protected PermissionRepositoryInterface $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
 
@@ -60,7 +63,8 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $role = $this->roleRepository->getRoleByID($id);
-        return view('admin.roles.edit', ['role' => $role]);
+        $permissions = $this->permissionRepository->getAllPermission();
+        return view('admin.roles.edit', ['role' => $role, 'permissions' => $permissions]);
     }
 
     /**
@@ -85,5 +89,29 @@ class RoleController extends Controller
             $this->roleRepository->deleteRole($role);
         }
         return redirect(route('admin.roles.index'));
+    }
+
+    /**
+     * Assign permission to role
+     */
+
+    public function givePermission(Request $request, string $id)
+    {
+        $role = $this->roleRepository->getRoleByID($id);
+        if ($role->hasPermissionTo($request->permissions)) {
+            return back()->with('message', 'Permission is already exists');
+        }
+        $role->givePermissionTo($request->permissions);
+        return back()->with('message', 'Permission is Added successfully');
+    }
+    public function revokePermission(string $id, Permission $permission)
+    {
+        $role = $this->roleRepository->getRoleByID($id);
+        $permission = $this->permissionRepository->findPermissionById($id);
+        if ($role->hasPermissionTo($permission)) {
+            $role->revokePermissionTo($permission);
+            return back()->with('message', 'Permission is revoked');
+        }
+        return back()->with('message', 'Permission not exists');
     }
 }
