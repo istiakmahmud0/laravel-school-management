@@ -30,6 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
+
                             <form action="{{ route('admin.permissions.update', $permission->id) }}" method="POST">
                                 @csrf
                                 @method('put')
@@ -54,5 +55,74 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Roles</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <div class="d-flex mx-2 py-4">
+                                @if (count($permission->roles) > 0)
+                                    @foreach ($permission->roles as $rolePermission)
+                                        <div class="px-2">
+                                            <form action="" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button class="btn btn-danger" type="submit"
+                                                    onclick="return confirm('Are you sure ?')">
+                                                    {{ $rolePermission->name }}</button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="d-flex align-items-center">
+                                        <p class="pl-3">No Roles is assign yet</p>
+                                    </div>
+                                @endif
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Add permission To role</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Roles</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="roles">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                @endforeach
+
+                            </select>
+                            <x-alert name='roles' />
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Assign</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </x-admin-layout>

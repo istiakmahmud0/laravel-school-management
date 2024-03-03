@@ -57,7 +57,7 @@
                             <div class="d-flex mx-2 py-4">
                                 @if (count($role->permissions) > 0)
                                     @foreach ($role->permissions as $rolePermission)
-                                        <div class="">
+                                        <div class="px-2">
                                             <form method="POST"
                                                 action="{{ route('admin.roles.permissions.revoke', [$role->id, $rolePermission->id]) }}">
                                                 @csrf

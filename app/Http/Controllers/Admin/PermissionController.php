@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
 use App\Interfaces\PermissionRepositoryInterface;
+use App\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -13,9 +14,10 @@ class PermissionController extends Controller
     /**
      * Permission repository constructor
      */
-    public function __construct(protected PermissionRepositoryInterface $permissionRepository)
+    public function __construct(protected PermissionRepositoryInterface $permissionRepository, protected RoleRepositoryInterface $roleRepository)
     {
         $this->permissionRepository = $permissionRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -58,7 +60,8 @@ class PermissionController extends Controller
     public function edit(string $id)
     {
         $permission = $this->permissionRepository->findPermissionById($id);
-        return view('admin.permissions.edit', ['permission' => $permission]);
+        $roles = $this->roleRepository->getAllRoles();
+        return view('admin.permissions.edit', ['permission' => $permission, 'roles' => $roles]);
     }
 
     /**
