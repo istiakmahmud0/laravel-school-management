@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
     // Assign permission to role
     Route::post('roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('admin.roles.permissions');
     Route::delete('roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('admin.roles.permissions.revoke');
+
+    // Assign roles to permissions
+    Route::post('permissions/{permission}/roles', [PermissionController::class, 'giveRoles'])->name('admin.permissions.roles');
+    Route::delete('permissions/{permission}/roles/{role}', [PermissionController::class, 'revokeRole'])->name('admin.permissions.roles.revoke');
 });
 
 

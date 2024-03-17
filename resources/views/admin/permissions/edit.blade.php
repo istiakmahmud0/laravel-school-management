@@ -70,9 +70,11 @@
                                 @if (count($permission->roles) > 0)
                                     @foreach ($permission->roles as $rolePermission)
                                         <div class="px-2">
-                                            <form action="" method="POST">
+                                            <form
+                                                action="{{ route('admin.permissions.roles.revoke', [$permission->id, $rolePermission->id]) }}"
+                                                method="POST">
                                                 @csrf
-                                                @method('put')
+                                                @method('delete')
                                                 <button class="btn btn-danger" type="submit"
                                                     onclick="return confirm('Are you sure ?')">
                                                     {{ $rolePermission->name }}</button>
@@ -102,7 +104,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="" method="POST">
+                <form action="{{ route('admin.permissions.roles', $permission->id) }}" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">

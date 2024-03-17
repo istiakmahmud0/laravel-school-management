@@ -89,4 +89,30 @@ class PermissionController extends Controller
 
         return redirect(route('admin.permissions.index'))->with('message', 'Permission has been deleted');
     }
+
+    /**
+     * Add roles to permission
+     */
+
+    public function giveRoles(Request $request, string $id)
+    {
+        $permission = $this->permissionRepository->findPermissionById($id);
+        if ($permission->hasRole($request->roles)) {
+            return redirect()->back()->with('message', 'Permission has the role assigned to it');
+        }
+        $permission->assignRole($request->roles);
+        return redirect()->back()->with('message', 'New role added to the permission');
+    }
+
+    public function revokeRole(string $permission, string $role)
+    {
+        $permission = $this->permissionRepository->findPermissionById($permission);
+        $role = $this->roleRepository->getRoleByID($role);
+
+        $success = $permission->removeRole($role);
+        // dd("success");
+        if ($success) {
+            return redirect()->back()->with('message', 'Role revoked from permission successfully');
+        }
+    }
 }

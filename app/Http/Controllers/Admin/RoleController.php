@@ -104,14 +104,16 @@ class RoleController extends Controller
         $role->givePermissionTo($request->permissions);
         return back()->with('message', 'Permission is Added successfully');
     }
-    public function revokePermission(string $id, Permission $permission)
+    public function revokePermission(string $role, string $permission)
     {
-        $role = $this->roleRepository->getRoleByID($id);
-        $permission = $this->permissionRepository->findPermissionById($id);
-        if ($role->hasPermissionTo($permission)) {
-            $role->revokePermissionTo($permission);
-            return back()->with('message', 'Permission is revoked');
+
+        $role = $this->roleRepository->getRoleByID($role);
+        $permission = $this->permissionRepository->findPermissionById($permission);
+
+        $success = $role->revokePermissionTo($permission);
+        // dd("success");
+        if ($success) {
+            return redirect()->back()->with('message', 'Role revoked from permission successfully');
         }
-        return back()->with('message', 'Permission not exists');
     }
 }

@@ -35,4 +35,8 @@ interface PermissionRepositoryInterface
      */
 
     public function deletePermission(object $permission): bool;
+
+    /**
+     *
+     */
 }
