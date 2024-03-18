@@ -37,6 +37,7 @@ interface PermissionRepositoryInterface
     public function deletePermission(object $permission): bool;
 
     /**
-     *
+     * Assign  role in permission
      */
+    public function assignRole(object $permission, array $permissionRoleDetails): Permission;
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RolePermissionRequest;
 use App\Http\Requests\RoleRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
+use Hamcrest\Core\IsInstanceOf;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use Spatie\Permission\Contracts\Permission;
@@ -95,13 +97,15 @@ class RoleController extends Controller
      * Assign permission to role
      */
 
-    public function givePermission(Request $request, string $id)
+    public function givePermission(RolePermissionRequest $request, string $id)
     {
         $role = $this->roleRepository->getRoleByID($id);
         if ($role->hasPermissionTo($request->permissions)) {
             return back()->with('message', 'Permission is already exists');
         }
-        $role->givePermissionTo($request->permissions);
+        if ($role instanceof Role) {
+            $this->roleRepository->assignRole($role, $request->validated());
+        }
         return back()->with('message', 'Permission is Added successfully');
     }
     public function revokePermission(string $role, string $permission)

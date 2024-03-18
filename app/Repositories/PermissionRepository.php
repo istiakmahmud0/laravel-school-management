@@ -58,4 +58,12 @@ class PermissionRepository implements PermissionRepositoryInterface
     {
         return $permission->delete();
     }
+
+    /**
+     * Assign  role in permission
+     */
+    public function assignRole(object $permission, array $permissionRoleDetails): Permission
+    {
+        return $permission->assignRole($permissionRoleDetails);
+    }
 }

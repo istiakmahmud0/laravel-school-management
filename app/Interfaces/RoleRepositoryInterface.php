@@ -31,4 +31,10 @@ interface RoleRepositoryInterface
      * Delete Role
      */
     public function deleteRole(object $Role): bool;
+
+
+    /**
+     * Assign permission in role
+     */
+    public function assignRole(object $role, array $rolePermissionDetails): Role;
 }

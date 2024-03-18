@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
+use App\Http\Requests\PermissionRoleRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
@@ -94,13 +95,16 @@ class PermissionController extends Controller
      * Add roles to permission
      */
 
-    public function giveRoles(Request $request, string $id)
+    public function giveRoles(PermissionRoleRequest $request, string $id)
     {
         $permission = $this->permissionRepository->findPermissionById($id);
         if ($permission->hasRole($request->roles)) {
             return redirect()->back()->with('message', 'Permission has the role assigned to it');
         }
-        $permission->assignRole($request->roles);
+        // $permission->assignRole($request->roles);
+        if ($permission instanceof Permission) {
+            $this->permissionRepository->assignRole($permission, $request->validated());
+        }
         return redirect()->back()->with('message', 'New role added to the permission');
     }
 
