@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
     // Assign roles to permissions
     Route::post('permissions/{permission}/roles', [PermissionController::class, 'giveRoles'])->name('admin.permissions.roles');
     Route::delete('permissions/{permission}/roles/{role}', [PermissionController::class, 'revokeRole'])->name('admin.permissions.roles.revoke');
+
+    // User
+    Route::resource('users', UserController::class)->names('admin.users');
 });
 
 

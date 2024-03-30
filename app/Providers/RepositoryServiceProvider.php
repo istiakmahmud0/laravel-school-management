@@ -7,8 +7,9 @@ use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Repositories\PermissionRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
-use UserRepository;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
