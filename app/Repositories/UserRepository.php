@@ -31,4 +31,13 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->model->where('id', $userId)->first();
     }
+
+    /**
+     * Assign role to user
+     */
+
+    public function assignRoleToUser(object $user, array $userDetails): User
+    {
+        return $user->assignRole($userDetails);
+    }
 }

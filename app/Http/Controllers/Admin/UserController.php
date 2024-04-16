@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssignRoleToUserRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -82,5 +84,36 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Assign new role to user
+     */
+
+    public function addRolesToUser(AssignRoleToUserRequest $request, string $id)
+    {
+        $user = $this->userRepository->getUserByID($id);
+        // dd($user);
+        if ($user->hasRole($request->roles)) {
+            return redirect()->back()->with('message', 'Role is already exists');
+        }
+        if ($user instanceof User) {
+            $this->userRepository->assignRoleToUser($user, $request->validated());
+        }
+        return redirect()->back()->with('message', 'Role added successfully');
+    }
+
+
+    public function removeRoleFromUser(string $user, string $role)
+    {
+
+        $user = $this->userRepository->getUserByID($user);
+        // $permission = $this->permissionRepository->findPermissionById($permission);
+
+        $success = $user->removeRole($role);
+        // dd("success");
+        if ($success) {
+            return redirect()->back()->with('message', 'Role revoked from permission successfully');
+        }
     }
 }

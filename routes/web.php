@@ -31,6 +31,10 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
 
     // User
     Route::resource('users', UserController::class)->names('admin.users');
+    // Assign roles to user
+    Route::post('users/{user}/roles', [UserController::class, 'addRolesToUser'])->name('admin.user.assign.roles');
+    // Delete roles form user
+    Route::delete('users/{user}/roles/{role}', [UserController::class, 'removeRoleFromUser'])->name('admin.user.remove.role');
 });
 
 

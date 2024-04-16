@@ -55,8 +55,13 @@
                             <div class="d-flex mx-2 py-4">
                                 @if (count($user->getRoleNames()) > 0)
                                     @foreach ($user->getRoleNames() as $role)
+                                        {{-- @php
+                                            dd($role);
+                                        @endphp --}}
+
                                         <div class="px-2">
-                                            <form method="POST" action="">
+                                            <form method="POST" {{-- action="{{ route('admin.user.remove.role', [$user->id, $role->id]) }}"> --}}
+                                                action="{{ route('admin.user.remove.role', [$user->id, $role]) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger" type="submit"
@@ -81,7 +86,7 @@
                                 <h3 class="card-title">Add Roles to user</h3>
                             </div>
 
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.user.assign.roles', $user->id) }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
