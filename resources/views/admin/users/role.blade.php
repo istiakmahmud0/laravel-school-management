@@ -121,9 +121,10 @@
                             </div>
                             <div class="d-flex mx-2 py-4">
                                 @if (count($user->getPermissionNames()) > 0)
-                                    @foreach ($user->getPermissionNames()() as $permission)
+                                    @foreach ($user->getPermissionNames() as $permission)
                                         <div class="px-2">
-                                            <form method="POST" action="">
+                                            <form method="POST"
+                                                action="{{ route('admin.user.remove.permission', [$user->id, $permission]) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger" type="submit"
@@ -148,14 +149,15 @@
                                 <h3 class="card-title">Add permissions to user</h3>
                             </div>
 
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.user.assign.permission', $user->id) }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">Permissions</label>
+                                        <label for="permissions">Permissions</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="permissions">
                                             @foreach ($permissions as $permission)
-                                                <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                                <option value="{{ $permission->name }}">{{ $permission->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <x-alert name='permissions' />

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssignPermissionToUserRequest;
 use App\Http\Requests\AssignRoleToUserRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
@@ -102,6 +103,22 @@ class UserController extends Controller
         }
         return redirect()->back()->with('message', 'Role added successfully');
     }
+    /**
+     * Assign new permission to user
+     */
+
+    public function addPermissionsToUser(AssignPermissionToUserRequest $request, string $id)
+    {
+        $user = $this->userRepository->getUserByID($id);
+        // dd($user);
+        if ($user->hasPermissionTo($request->permissions)) {
+            return redirect()->back()->with('message', 'Permission is already exists');
+        }
+        if ($user instanceof User) {
+            $this->userRepository->assignPermissionToUser($user, $request->validated());
+        }
+        return redirect()->back()->with('message', 'Permission added successfully');
+    }
 
 
     public function removeRoleFromUser(string $user, string $role)
@@ -113,7 +130,20 @@ class UserController extends Controller
         $success = $user->removeRole($role);
         // dd("success");
         if ($success) {
-            return redirect()->back()->with('message', 'Role revoked from permission successfully');
+            return redirect()->back()->with('message', 'Role revoked from user successfully');
+        }
+    }
+
+    public function removePermissionFromUser(string $user, string $permission)
+    {
+
+        $user = $this->userRepository->getUserByID($user);
+        // $permission = $this->permissionRepository->findPermissionById($permission);
+
+        $success = $user->revokePermissionTo($permission);
+        // dd("success");
+        if ($success) {
+            return redirect()->back()->with('message', 'Permission revoked from user successfully');
         }
     }
 }

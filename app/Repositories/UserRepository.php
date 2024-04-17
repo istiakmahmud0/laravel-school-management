@@ -40,4 +40,13 @@ class UserRepository implements UserRepositoryInterface
     {
         return $user->assignRole($userDetails);
     }
+
+    /**
+     * Assign permission to user
+     */
+
+    public function assignPermissionToUser(object $user, array $permissionDetails): User
+    {
+        return $user->givePermissionTo($permissionDetails);
+    }
 }

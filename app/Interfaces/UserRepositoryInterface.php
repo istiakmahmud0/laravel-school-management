@@ -22,4 +22,9 @@ interface UserRepositoryInterface
      */
 
     public function assignRoleToUser(object $user, array $userDetails): User;
+    /**
+     * Assign permission to user
+     */
+
+    public function assignPermissionToUser(object $user, array $permissionDetails): User;
 }
