@@ -40,7 +40,12 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
     Route::post('users/{user}/permissions', [UserController::class, 'addPermissionsToUser'])->name('admin.user.assign.permission');
     // Delete roles form user
     Route::delete('users/{user}/permissions/{permission}', [UserController::class, 'removePermissionFromUser'])->name('admin.user.remove.permission');
+
+    // Edit profile
 });
+
+
+
 
 
 Route::middleware('auth')->group(function () {
