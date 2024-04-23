@@ -33,6 +33,24 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * Update User
+     */
+
+    public function updateUser(object $user, array $userDetails): bool
+    {
+        return $user->update($userDetails);
+    }
+
+    /**
+     * Delete user
+     */
+
+    public function deleteUser(object $user): bool
+    {
+        return $user->delete();
+    }
+
+    /**
      * Assign role to user
      */
 

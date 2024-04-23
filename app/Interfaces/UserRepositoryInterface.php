@@ -18,6 +18,18 @@ interface UserRepositoryInterface
     public function getUserByID(int $userId): User;
 
     /**
+     * Update User
+     */
+
+    public function updateUser(object $user, array $userDetails): bool;
+
+    /**
+     * Delete user
+     */
+
+    public function deleteUser(object $user): bool;
+
+    /**
      * Assign role to user
      */
 

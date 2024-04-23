@@ -50,17 +50,12 @@
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Roles</a>
-                                                    </span>
-                                                    <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Permissions</a>
-                                                    </span>
-                                                    <span class="mr-2">
                                                         <a href="{{ route('admin.users.edit', $user->id) }}"
                                                             class="btn btn-primary">Edit</a>
                                                     </span>
                                                     <span>
-                                                        <form method="POST" action="">
+                                                        <form method="POST"
+                                                            action="{{ route('admin.users.destroy', $user->id) }}">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-danger" type="submit"

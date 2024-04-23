@@ -30,7 +30,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body">
@@ -39,6 +39,12 @@
                                         <input type="text" class="form-control" id="name" name="name"
                                             placeholder="Enter Name" value="{{ $user->name }}">
                                         <x-alert name='name' />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="Enter email" value="{{ $user->email }}">
+                                        <x-alert name='email' />
                                     </div>
                                 </div>
                                 <div class="card-footer">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignPermissionToUserRequest;
 use App\Http\Requests\AssignRoleToUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
@@ -74,9 +75,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
+
     {
-        //
+        $user = $this->userRepository->getUserByID($id);
+        if ($user instanceof User) {
+            $this->userRepository->updateUser($user, $request->validated());
+        }
+        return redirect()->back()->with('message', 'User info update successfully');
     }
 
     /**
@@ -84,7 +90,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = $this->userRepository->getUserByID($id);
+        if ($user instanceof User) {
+            $this->userRepository->deleteUser($user);
+        }
+        return redirect()->back()->with('message', 'User Removed successfully');
     }
 
     /**
