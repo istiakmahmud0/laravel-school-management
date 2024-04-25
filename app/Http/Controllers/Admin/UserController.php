@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignPermissionToUserRequest;
 use App\Http\Requests\AssignRoleToUserRequest;
+use App\Http\Requests\PasswordUpdateThroughAdminRequest;
 use App\Http\Requests\UserRequest;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -154,6 +156,24 @@ class UserController extends Controller
         // dd("success");
         if ($success) {
             return redirect()->back()->with('message', 'Permission revoked from user successfully');
+        }
+    }
+
+    /**
+     * Users update password
+     */
+    public function updateUserPassword(PasswordUpdateThroughAdminRequest $request, string $id)
+    {
+
+        $user = $this->userRepository->getUserByID($id);
+        // Verify the old password
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('message', 'Password Not matched');
+        }
+
+        if ($user instanceof User) {
+            $this->userRepository->updateUserPassword($user, $request->validated());
+            return redirect()->back()->with('message', 'Password updated successfully.');
         }
     }
 }

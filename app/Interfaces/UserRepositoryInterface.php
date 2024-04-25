@@ -39,4 +39,9 @@ interface UserRepositoryInterface
      */
 
     public function assignPermissionToUser(object $user, array $permissionDetails): User;
+
+    /**
+     * updateUsersPassword
+     */
+    public function updateUserPassword(object $user, array $passwordDetails): bool;
 }

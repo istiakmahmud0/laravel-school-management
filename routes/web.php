@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -40,7 +41,12 @@ Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function
     Route::post('users/{user}/permissions', [UserController::class, 'addPermissionsToUser'])->name('admin.user.assign.permission');
     // Delete roles form user
     Route::delete('users/{user}/permissions/{permission}', [UserController::class, 'removePermissionFromUser'])->name('admin.user.remove.permission');
-    // Edit profile
+    // Update the admin password
+    Route::post('/admin/password/update/{userId}', [UserController::class, 'updateUserPassword'])->name('admin.updatePassword');
+    /**
+     * User profile update
+     */
+    Route::get('user/profile', [AdminProfileController::class, 'index'])->name('admin.user.profile');
 });
 
 

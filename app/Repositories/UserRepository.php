@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -66,5 +67,13 @@ class UserRepository implements UserRepositoryInterface
     public function assignPermissionToUser(object $user, array $permissionDetails): User
     {
         return $user->givePermissionTo($permissionDetails);
+    }
+
+    /**
+     * updateUsersPassword
+     */
+    public function updateUserPassword(object $user, array $passwordDetails): bool
+    {
+        return $user->update($passwordDetails);
     }
 }
