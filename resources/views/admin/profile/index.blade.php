@@ -30,20 +30,20 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.users.update', auth()->user()->id) }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter Name" value="">
+                                            placeholder="Enter Name" value="{{ auth()->user()->name }}">
                                         <x-alert name='name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Enter email" value="">
+                                            placeholder="Enter email" value="{{ auth()->user()->email }}">
                                         <x-alert name='email' />
                                     </div>
                                 </div>
@@ -62,9 +62,9 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('password.update') }}" method="POST">
+                            <form action="{{ route('admin.updatePassword', auth()->user()->id) }}" method="POST">
                                 @csrf
-                                @method('put')
+                                {{-- @method('put') --}}
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="current_password">Current Password</label>

@@ -111,7 +111,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.user.profile') }}" class="nav-link">
+                    <a href="{{ route('admin.user.profile') }}"
+                        class="nav-link {{ Route::is('admin.user.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Profile
