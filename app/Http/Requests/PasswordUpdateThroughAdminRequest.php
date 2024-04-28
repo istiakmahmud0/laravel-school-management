@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\CurrentPassword;
 
 class PasswordUpdateThroughAdminRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class PasswordUpdateThroughAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => ['required'],
+            'current_password' => ['required', new CurrentPassword],
             'password' => ['required', 'confirmed']
         ];
     }

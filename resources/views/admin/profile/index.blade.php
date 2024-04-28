@@ -71,20 +71,21 @@
                                         <input type="password" class="form-control" id="current_password"
                                             name="current_password" placeholder="">
 
-                                        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+                                        <x-alert name='current_password' />
                                     </div>
                                     <div class="form-group">
                                         <label for="password">New Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="">
-                                        <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                                        <x-alert name='password' />
                                     </div>
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirm Password</label>
                                         <input type="password" class="form-control" id="password_confirmation"
                                             name="password_confirmation" placeholder="">
-                                        <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+
                                     </div>
+                                    <x-alert name='password_confirmation' />
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
