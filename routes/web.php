@@ -13,12 +13,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::group(['prefix' => 'admin-dashboard', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('roles', RoleController::class)->names('admin.roles');
     Route::resource('permissions', PermissionController::class)->names('admin.permissions');

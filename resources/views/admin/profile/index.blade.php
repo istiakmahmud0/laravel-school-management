@@ -30,20 +30,20 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.users.update', auth()->user()->id) }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter Name" value="">
+                                            placeholder="Enter Name" value="{{ auth()->user()->name }}">
                                         <x-alert name='name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Enter email" value="">
+                                            placeholder="Enter email" value="{{ auth()->user()->email }}">
                                         <x-alert name='email' />
                                     </div>
                                 </div>
@@ -62,29 +62,30 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('password.update') }}" method="POST">
+                            <form action="{{ route('admin.updatePassword', auth()->user()->id) }}" method="POST">
                                 @csrf
-                                @method('put')
+                                {{-- @method('put') --}}
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="current_password">Current Password</label>
                                         <input type="password" class="form-control" id="current_password"
                                             name="current_password" placeholder="">
 
-                                        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+                                        <x-alert name='current_password' />
                                     </div>
                                     <div class="form-group">
                                         <label for="password">New Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="">
-                                        <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                                        <x-alert name='password' />
                                     </div>
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirm Password</label>
                                         <input type="password" class="form-control" id="password_confirmation"
                                             name="password_confirmation" placeholder="">
-                                        <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+
                                     </div>
+                                    <x-alert name='password_confirmation' />
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
