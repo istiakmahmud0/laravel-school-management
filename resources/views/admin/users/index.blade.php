@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
                             <li class="breadcrumb-item active">Users</li>
                         </ol>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-end">
-                            <a href="">
+                            <a href="{{ route('admin.users.create') }}">
                                 <h3 class="btn btn-primary">create</h3>
                             </a>
                         </div>
@@ -39,6 +39,7 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>Name</th>
+                                            <th>Role</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -47,6 +48,8 @@
                                             <tr>
                                                 <td> {{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}
+                                                </td>
+                                                <td>{{ $user->roles->first()->name }}
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">
