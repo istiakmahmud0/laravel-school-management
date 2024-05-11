@@ -12,6 +12,13 @@ interface UserRepositoryInterface
      */
     public function getAllUser(): Collection;
 
+
+    /**
+     * Create new user
+     */
+
+    public function createUser(array $userDetails): User;
+
     /**
      * Find user by it's ID
      */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignPermissionToUserRequest;
 use App\Http\Requests\AssignRoleToUserRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\PasswordUpdateThroughAdminRequest;
 use App\Http\Requests\UserRequest;
 use App\Interfaces\PermissionRepositoryInterface;
@@ -34,8 +35,8 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAllUser();
-        $roles = $this->roleRepository->getAllRoles();
-        $permissions = $this->permissionRepository->getAllPermission();
+        // $roles = $this->roleRepository->getAllRoles();
+        // $permissions = $this->permissionRepository->getAllPermission();
         return view('admin.users.index', ['users' => $users]);
     }
 
@@ -44,15 +45,32 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = $this->roleRepository->getAllRoles();
+        return view('admin.users.create', ['roles' => $roles]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        // dd("User");
+        $userData = $request->validated();
+        // dd($validated);
+
+        $user = $this->userRepository->createUser([
+            'name' => $userData['name'],
+            'email' => $userData['email'],
+            'password' => Hash::make($userData['password']),
+        ]);
+        // dd($user);
+        if ($request->has('roles')) {
+            // $role = $this->roleRepository->createNewRoles(['name' => $userData['role']]);
+            if ($user instanceof User) {
+                $this->userRepository->assignRoleToUser($user, [$userData['roles']]);
+            }
+        }
+        return redirect(route('admin.users.index', ['message', 'User has been created successfully']));
     }
 
     /**
