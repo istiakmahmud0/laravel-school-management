@@ -54,18 +54,14 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        // dd("User");
         $userData = $request->validated();
-        // dd($validated);
-
         $user = $this->userRepository->createUser([
             'name' => $userData['name'],
             'email' => $userData['email'],
             'password' => Hash::make($userData['password']),
         ]);
-        // dd($user);
+
         if ($request->has('roles')) {
-            // $role = $this->roleRepository->createNewRoles(['name' => $userData['role']]);
             if ($user instanceof User) {
                 $this->userRepository->assignRoleToUser($user, [$userData['roles']]);
             }

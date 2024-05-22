@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SchoolClassController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,12 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
      * User profile update
      */
     Route::get('user/profile', [AdminProfileController::class, 'index'])->name('admin.user.profile');
+
+    /**
+     * SchoolClass
+     */
+
+    Route::resource('/school-class', SchoolClassController::class)->names('admin.schoolClass');
 });
 
 

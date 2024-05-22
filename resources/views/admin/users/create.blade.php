@@ -38,13 +38,13 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter name" value="">
+                                            placeholder="Enter name" value="{{ old('name') }}">
                                         <x-alert name='name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control" id="email" name="email"
-                                            placeholder="Enter email" value="">
+                                            placeholder="Enter email" value="{{ old('email') }}">
                                         <x-alert name='email' />
                                     </div>
                                     {{-- Added roles --}}
@@ -53,7 +53,10 @@
 
                                         <select class="form-control" id="role" name="roles">
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                                <option value="{{ $role->name }}"
+                                                    {{ old('roles') == $role->name ? 'selected' : '' }}>
+                                                    {{ $role->name }}
+                                                </option>
                                             @endforeach
                                         </select>
 
@@ -62,14 +65,14 @@
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Enter pasword" value="">
+                                            placeholder="Enter pasword" value="{{ old('password') }}">
                                         <x-alert name='password' />
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_password">Re-Enter your password</label>
                                         <input type="password" class="form-control" id="confirmPassword"
                                             name="password_confirmation" placeholder="Re-enter your password"
-                                            value="">
+                                            value="{{ old('confirm_password') }}">
                                         <x-alert name='password_confirmation' />
                                     </div>
                                 </div>
