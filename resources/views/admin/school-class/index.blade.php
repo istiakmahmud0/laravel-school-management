@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('admin.users.create') }}">
+                            <a href="{{ route('admin.schoolClass.create') }}">
                                 <h3 class="btn btn-primary">create</h3>
                             </a>
                         </div>
@@ -45,10 +45,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td> fsdfs</td>
+                                            <td> 1</td>
                                             <td>
+                                                Name
                                             </td>
-                                            <td>dddd
+                                            <td>Active
                                             </td>
                                             <td class="d-flex">
                                                 <span class="mr-2">
