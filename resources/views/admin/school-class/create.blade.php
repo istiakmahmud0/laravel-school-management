@@ -29,7 +29,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.schoolClass.create') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -44,9 +44,7 @@
                                         <select class="form-control" id="role" name="roles">
                                             <option value="">Active</option>
                                             <option value="">Inactive</option>
-
                                         </select>
-
                                         <x-alert name='role' />
                                     </div>
                                 </div>
