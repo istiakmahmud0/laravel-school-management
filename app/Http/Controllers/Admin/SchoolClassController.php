@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SchoolClassRequest;
+use App\Interfaces\SchoolClassRepositoryInterface;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -12,8 +14,9 @@ class SchoolClassController extends Controller
      * School class controller constructor
      */
 
-    public function __construct()
+    public function __construct(protected SchoolClassRepositoryInterface $schoolClassRepository)
     {
+        $this->schoolClassRepository = $schoolClassRepository;
     }
 
     /**
@@ -35,9 +38,10 @@ class SchoolClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SchoolClassRequest $request)
     {
-        //
+        $this->schoolClassRepository->createSchoolClass($request->validated());
+        return redirect()->route('admin.schoolClass.index')->with('message', 'Class created successfully');
     }
 
     /**

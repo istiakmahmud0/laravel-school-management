@@ -29,23 +29,23 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('admin.schoolClass.create') }}" method="POST">
+                            <form action="{{ route('admin.schoolClass.store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter name" value="">
+                                            placeholder="Enter name" value="{{ old('name') }}">
                                         <x-alert name='name' />
                                     </div>
                                     {{-- Added roles --}}
                                     <div class="form-group">
-                                        <label for="role">Status</label>
-                                        <select class="form-control" id="role" name="roles">
-                                            <option value="">Active</option>
-                                            <option value="">Inactive</option>
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
-                                        <x-alert name='role' />
+                                        <x-alert name='status' />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
