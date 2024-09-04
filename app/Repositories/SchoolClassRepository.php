@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\SchoolClassRepositoryInterface;
 use App\Models\SchoolClass;
+use Illuminate\Database\Eloquent\Collection;
 
 class SchoolClassRepository implements SchoolClassRepositoryInterface
 {
@@ -16,10 +17,26 @@ class SchoolClassRepository implements SchoolClassRepositoryInterface
     }
 
     /**
+     * Get all school class data
+     */
+    public function getAllSchoolClass(): Collection
+    {
+        return $this->model::all();
+    }
+
+    /**
      * Store SchoolClass data
      */
     public function createSchoolClass(array $schoolClassDetails): SchoolClass
     {
         return $this->model->create($schoolClassDetails);
+    }
+
+    /**
+     * Get school class by id
+     */
+    public function getSchoolClassById(string $id): SchoolClass
+    {
+        return $this->model->where('id', $id);
     }
 }

@@ -42,8 +42,10 @@
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
+                                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active
+                                            </option>
+                                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive
+                                            </option>
                                         </select>
                                         <x-alert name='status' />
                                     </div>

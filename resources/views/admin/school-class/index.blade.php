@@ -44,27 +44,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td> 1</td>
-                                            <td>
-                                                Name
-                                            </td>
-                                            <td>Active
-                                            </td>
-                                            <td class="d-flex">
-                                                <span class="mr-2">
-                                                    <a href="" class="btn btn-primary">Edit</a>
-                                                </span>
-                                                <span>
-                                                    <form method="POST" action="">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger" type="submit"
-                                                            onclick="return confirm('Are you sure ?')">Delete</button>
-                                                    </form>
-                                                </span>
-                                            </td>
-                                        </tr>
+                                        @foreach ($schoolClass as $sc)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    {{ $sc->name }}
+                                                </td>
+                                                <td>{{ $sc->status == 1 ? 'Active' : 'Inactive' }}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <span class="mr-2">
+                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                    </span>
+                                                    <span>
+                                                        <form method="POST" action="">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" type="submit"
+                                                                onclick="return confirm('Are you sure ?')">Delete</button>
+                                                        </form>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
 
 
                                     </tbody>

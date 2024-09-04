@@ -24,7 +24,8 @@ class SchoolClassController extends Controller
      */
     public function index()
     {
-        return view('admin.school-class.index');
+        $schoolClass = $this->schoolClassRepository->getAllSchoolClass();
+        return view('admin.school-class.index', ['schoolClass' => $schoolClass]);
     }
 
     /**
