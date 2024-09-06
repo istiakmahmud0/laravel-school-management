@@ -45,20 +45,13 @@ class SchoolClassController extends Controller
         return redirect()->route('admin.schoolClass.index')->with('message', 'Class created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.school-class.edit');
     }
 
     /**

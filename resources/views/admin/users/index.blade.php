@@ -49,7 +49,7 @@
                                                 <td> {{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}
                                                 </td>
-                                                <td>{{ $user->roles->first()->name }}
+                                                <td>{{ $user?->roles->first()?->name }}
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">

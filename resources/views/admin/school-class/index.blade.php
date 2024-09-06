@@ -54,7 +54,8 @@
                                                 </td>
                                                 <td class="d-flex">
                                                     <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                        <a href="{{ route('admin.schoolClass.edit', $sc->id) }}"
+                                                            class="btn btn-primary">Edit</a>
                                                     </span>
                                                     <span>
                                                         <form method="POST" action="">

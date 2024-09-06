@@ -37,6 +37,25 @@ class SchoolClassRepository implements SchoolClassRepositoryInterface
      */
     public function getSchoolClassById(string $id): SchoolClass
     {
-        return $this->model->where('id', $id);
+        $sc = $this->model->query;
+        return $sc->findOrFail($id);
+    }
+
+    /**
+     * Update post
+     */
+
+    public function updatePost(object $sc, array $newDetails): bool
+    {
+        return $sc->update($newDetails);
+    }
+
+    /**
+     * Delete post
+     */
+
+    public function deletePost(object $sc): bool
+    {
+        return $sc->delete();
     }
 }

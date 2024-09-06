@@ -25,4 +25,16 @@ interface SchoolClassRepositoryInterface
      */
 
     public function getSchoolClassById(string $id): SchoolClass;
+
+    /**
+     * Update post
+     */
+
+    public function updatePost(object $sc, array $newDetails): bool;
+
+    /**
+     * Delete post
+     */
+
+    public function deletePost(object $sc): bool;
 }
