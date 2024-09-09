@@ -37,7 +37,7 @@ class SchoolClassRepository implements SchoolClassRepositoryInterface
      */
     public function getSchoolClassById(string $id): SchoolClass
     {
-        $sc = $this->model->query;
+        $sc = $this->model->query();
         return $sc->findOrFail($id);
     }
 

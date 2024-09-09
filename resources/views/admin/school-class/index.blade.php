@@ -58,7 +58,8 @@
                                                             class="btn btn-primary">Edit</a>
                                                     </span>
                                                     <span>
-                                                        <form method="POST" action="">
+                                                        <form method="POST"
+                                                            action="{{ route('admin.schoolClass.destroy', $sc->id) }}">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-danger" type="submit"

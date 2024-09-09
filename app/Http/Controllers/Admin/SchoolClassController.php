@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SchoolClassRequest;
 use App\Interfaces\SchoolClassRepositoryInterface;
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -51,15 +52,20 @@ class SchoolClassController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.school-class.edit');
+        $sc = $this->schoolClassRepository->getSchoolClassById($id);
+        return view('admin.school-class.edit', ['sc' => $sc]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SchoolClassRequest $request, string $id)
     {
-        //
+        $sc = $this->schoolClassRepository->getSchoolClassById($id);
+        if ($sc instanceof SchoolClass) {
+            $this->schoolClassRepository->updatePost($sc, $request->validated());
+        }
+        return redirect(route('admin.schoolClass.index'))->with('message', 'School class updated successfully');
     }
 
     /**
@@ -67,6 +73,10 @@ class SchoolClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sc = $this->schoolClassRepository->getSchoolClassById($id);
+        if ($sc instanceof SchoolClass) {
+            $this->schoolClassRepository->deletePost($sc);
+        }
+        return redirect(route('admin.schoolClass.index'))->with('message', 'School class deleted successfully');
     }
 }
