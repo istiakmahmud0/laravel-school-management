@@ -92,6 +92,16 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.subjects.index') }}"
+                            class="nav-link {{ Route::is('admin.subjects.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Subject
+                                {{-- <span class="right badge badge-danger">New</span> --}}
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -132,16 +142,17 @@
                         </a>
                     </li>
                 @endif
+
+                {{-- Logout for every user --}}
+
                 <li class="nav-item cursor-pointer">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <div class="nav-link cursor-pointer">
                             <i class="nav-icon fas fa-th"></i>
-
                             <button type="submit"
                                 class="!bg-transparent !text-current !border-none !p-0 !cursor-pointer !focus:outline-none">Logout</button>
                             {{-- <span class="right badge badge-danger">New</span> --}}
-
                         </div>
                     </form>
                 </li>

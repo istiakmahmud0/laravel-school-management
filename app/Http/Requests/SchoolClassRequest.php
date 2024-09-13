@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SchoolClassRequest extends FormRequest
 {
@@ -22,7 +23,8 @@ class SchoolClassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:school_classes,name'],
+            // 'name' => ['required', 'string', 'unique:school_classes,name'],
+            'name' => ['required', 'string', Rule::unique('school_classes')->ignore($this->route('school_class'))],
             'status' => ['required', 'boolean']
         ];
     }

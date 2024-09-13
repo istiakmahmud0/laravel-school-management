@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SchoolClassController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,8 +53,12 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
     /**
      * SchoolClass
      */
-
     Route::resource('/school-class', SchoolClassController::class)->names('admin.schoolClass');
+
+    /**
+     * Subject
+     */
+    Route::resource('subject', SubjectController::class)->names('admin.subjects');
 });
 
 
