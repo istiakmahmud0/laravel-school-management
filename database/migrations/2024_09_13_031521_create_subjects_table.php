@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('subject_name');
+            $table->enum('subject_type', ['Theory', 'Practical']);
+            $table->boolean('subject_status');
             $table->timestamps();
         });
     }
