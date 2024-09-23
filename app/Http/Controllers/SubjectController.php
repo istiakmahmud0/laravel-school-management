@@ -19,7 +19,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.subject.create');
     }
 
     /**
