@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubjectRequest;
+use App\Interfaces\SubjectRepositoryInterface;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
+    /**
+     * Subject controller constructor
+     */
+    public function __construct(protected SubjectRepositoryInterface $subjectRepository)
+    {
+
+        $this->subjectRepository = $subjectRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,9 +36,10 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        //
+        $this->subjectRepository->createNewSubject($request->validated());
+        return redirect(route('admin.subjects.index'));
     }
 
     /**

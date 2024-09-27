@@ -9,9 +9,9 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.subjects.index') }}">School class</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.subjects.index') }}">Subject</a>
                             </li>
-                            <li class="breadcrumb-item active">create class</li>
+                            <li class="breadcrumb-item active">create Subject</li>
                         </ol>
                     </div>
                 </div>
@@ -25,18 +25,19 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Create Class</h3>
+                                <h3 class="card-title">Create Subject</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+
+                            <form action="{{ route('admin.subjects.store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter name" value="{{ old('name') }}">
-                                        <x-alert name='name' />
+                                        <label for="subject_name">Name</label>
+                                        <input type="text" class="form-control" id="subject_name" name="subject_name"
+                                            placeholder="Enter name" value="{{ old('subject_name') }}">
+                                        <x-alert name='subject_name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="subject_type">Subject Type</label>
@@ -46,17 +47,17 @@
                                             <option value="Practical">Practical
                                             </option>
                                         </select>
-                                        <x-alert name='status' />
+                                        <x-alert name='subject_type' />
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <select class="form-control" id="status" name="status">
+                                        <label for="subject_status">Status</label>
+                                        <select class="form-control" id="subject_status" name="subject_status">
                                             <option value="1">Active
                                             </option>
                                             <option value="0">Inactive
                                             </option>
                                         </select>
-                                        <x-alert name='status' />
+                                        <x-alert name='subject_status' />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
