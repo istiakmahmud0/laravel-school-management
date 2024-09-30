@@ -45,32 +45,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                Name
-                                            </td>
-                                            <td>
-                                                Theoritical
-                                            </td>
-                                            <td>Active
-                                            </td>
-                                            <td class="d-flex">
-                                                <span class="mr-2">
-                                                    <a href="" class="btn btn-primary">Edit</a>
-                                                </span>
-                                                <span>
-                                                    <form method="POST" action="">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger" type="submit"
-                                                            onclick="return confirm('Are you sure ?')">Delete</button>
-                                                    </form>
-                                                </span>
-                                            </td>
-                                        </tr>
-
+                                        @foreach ($subjects as $subject)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    {{ $subject->subject_name }}
+                                                </td>
+                                                <td>
+                                                    {{ $subject->subject_type }}
+                                                </td>
+                                                <td> {{ $subject->subject_status == 1 ? 'Active' : 'Inactive' }}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <span class="mr-2">
+                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                    </span>
+                                                    <span>
+                                                        <form method="POST" action="">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" type="submit"
+                                                                onclick="return confirm('Are you sure ?')">Delete</button>
+                                                        </form>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

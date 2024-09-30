@@ -22,7 +22,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('admin.subject.index');
+        $subjects = $this->subjectRepository->getAllSubjects();
+        return view('admin.subject.index', ['subjects' => $subjects]);
     }
 
     /**
@@ -39,7 +40,7 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         $this->subjectRepository->createNewSubject($request->validated());
-        return redirect(route('admin.subjects.index'));
+        return redirect()->route('admin.')->with('message', 'Subject Created successfully');
     }
 
     /**

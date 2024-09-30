@@ -33,4 +33,13 @@ class SubjectRepository implements SubjectRepositoryInterface
 
         return $this->model->create($subjectDetails);
     }
+
+    /**
+     * Get subjects by id
+     */
+    public function getSubjectById(string $id): Subject
+    {
+        $subject = $this->model->query();
+        return $subject->findOrFail($id);
+    }
 }

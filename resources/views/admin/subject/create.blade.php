@@ -42,19 +42,23 @@
                                     <div class="form-group">
                                         <label for="subject_type">Subject Type</label>
                                         <select class="form-control" id="subject_type" name="subject_type">
-                                            <option value="Theory">Theory
+                                            <option value="Theory"
+                                                {{ old('subject_type') == 'Theory' ? 'selected' : '' }}>Theory</option>
+                                            <option value="Practical"
+                                                {{ old('subject_type') == 'Practical' ? 'selected' : '' }}>Practical
                                             </option>
-                                            <option value="Practical">Practical
-                                            </option>
+
                                         </select>
                                         <x-alert name='subject_type' />
                                     </div>
                                     <div class="form-group">
                                         <label for="subject_status">Status</label>
                                         <select class="form-control" id="subject_status" name="subject_status">
-                                            <option value="1">Active
+                                            <option value="1" {{ old('subject_status') == 1 ? 'selected' : '' }}>
+                                                Active
                                             </option>
-                                            <option value="0">Inactive
+                                            <option value="0" {{ old('subject_status') == 0 ? 'selected' : '' }}>
+                                                Inactive
                                             </option>
                                         </select>
                                         <x-alert name='subject_status' />

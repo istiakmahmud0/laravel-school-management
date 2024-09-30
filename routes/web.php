@@ -61,10 +61,6 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
     Route::resource('subject', SubjectController::class)->names('admin.subjects');
 });
 
-
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
