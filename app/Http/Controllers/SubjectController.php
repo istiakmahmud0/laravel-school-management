@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubjectRequest;
 use App\Interfaces\SubjectRepositoryInterface;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -40,7 +41,7 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         $this->subjectRepository->createNewSubject($request->validated());
-        return redirect()->route('admin.')->with('message', 'Subject Created successfully');
+        return redirect()->route('admin.subjects.index')->with('message', 'Subject Created successfully');
     }
 
     /**
@@ -56,7 +57,8 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subject = $this->subjectRepository->getSubjectById($id);
+        return view('admin.subject.edit', ['subject' => $subject]);
     }
 
     /**
@@ -72,6 +74,10 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subject = $this->subjectRepository->getSubjectById($id);
+        if ($subject instanceof Subject) {
+            $this->subjectRepository->deleteSubject($subject);
+        }
+        return redirect()->route('admin.subjects.index')->with('message', 'Subject Deleted successfully');
     }
 }

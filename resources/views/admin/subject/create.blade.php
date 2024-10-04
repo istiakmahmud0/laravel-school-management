@@ -47,7 +47,6 @@
                                             <option value="Practical"
                                                 {{ old('subject_type') == 'Practical' ? 'selected' : '' }}>Practical
                                             </option>
-
                                         </select>
                                         <x-alert name='subject_type' />
                                     </div>

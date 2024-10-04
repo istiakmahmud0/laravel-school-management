@@ -42,4 +42,20 @@ class SubjectRepository implements SubjectRepositoryInterface
         $subject = $this->model->query();
         return $subject->findOrFail($id);
     }
+
+    /**
+     * Update subject
+     */
+    public function updateSubject(object $subject, array $newDetails): bool
+    {
+        return $subject->update($newDetails);
+    }
+
+    /**
+     * Delete subject
+     */
+    public function deleteSubject(object $subject): bool
+    {
+        return $subject->delete();
+    }
 }

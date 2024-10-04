@@ -21,4 +21,13 @@ interface SubjectRepositoryInterface
      * Get subjects by id
      */
     public function getSubjectById(string $id): Subject;
+
+    /**
+     * Update subject
+     */
+    public function updateSubject(object $subject, array $newDetails): bool;
+    /**
+     * Delete subject
+     */
+    public function deleteSubject(object $subject): bool;
 }

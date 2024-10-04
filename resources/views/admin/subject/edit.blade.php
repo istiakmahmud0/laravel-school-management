@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Subject</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.subjects.index') }}">Subject</a>
                             </li>
                             <li class="breadcrumb-item active">Edit Subject</li>
                         </ol>
@@ -34,28 +34,36 @@
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter name" value="">
+                                        <label for="subject_name">Name</label>
+                                        <input type="text" class="form-control" id="subject_name" name="subject_name"
+                                            placeholder="Enter name" value="{{ $subject->subject_name }}">
                                         <x-alert name='name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="subject_type">Subject Type</label>
                                         <select class="form-control" id="subject_type" name="subject_type">
-                                            <option value="Theory">Theory
+                                            <option value="Theory"
+                                                {{ $subject->subject_type == 'Theory' ? 'selected' : '' }}>
+                                                Theory
                                             </option>
-                                            <option value="Practical">Practical
+                                            <option value="Practical"
+                                                {{ $subject->subject_type == 'Practical' ? 'selected' : '' }}>
+                                                Practical
                                             </option>
                                         </select>
                                         <x-alert name='status' />
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <select class="form-control" id="status" name="status">
-                                            <option value="1">Active
+                                        <label for="subject_status">Status</label>
+                                        <select class="form-control" id="subject_status" name="status">
+                                            <option value="1"
+                                                {{ $subject->subject_status == '1' ? 'selected' : '' }}>
+                                                Active
                                             </option>
                                             </option>
-                                            <option value="0">Inactive
+                                            <option value="0"
+                                                {{ $subject->subject_status == '0' ? 'selected' : '' }}>
+                                                Inactive
                                             </option>
                                         </select>
                                         <x-alert name='status' />
