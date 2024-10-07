@@ -40,7 +40,16 @@ class SubjectController extends Controller
      */
     public function store(SubjectRequest $request)
     {
-        $this->subjectRepository->createNewSubject($request->validated());
+        $validatedData = $request->validated();
+
+        foreach ($validatedData['subjects'] as $subjectData) {
+            $this->subjectRepository->createNewSubject($subjectData);
+        }
+
+
+        // $this->subjectRepository->createNewSubject($request->validated());
+
+
         return redirect()->route('admin.subjects.index')->with('message', 'Subject Created successfully');
     }
 

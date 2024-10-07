@@ -22,9 +22,10 @@ class SubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject_name' => ['required', 'string'],
-            'subject_type' => ['required', 'in:Practical,Theory'],
-            'subject_status' => ['required', 'boolean'],
+
+            'subjects.*.subject_name' => ['required', 'string'],
+            'subjects.*.subject_type' => ['required', 'in:Practical,Theory'],
+            'subjects.*.subject_status' => ['required', 'boolean'],
         ];
     }
 }
