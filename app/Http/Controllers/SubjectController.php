@@ -64,9 +64,13 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubjectRequest $request, string $id)
     {
-        //
+        $subject = $this->subjectRepository->getSubjectById($id);
+        if ($subject instanceof Subject) {
+            $this->subjectRepository->updateSubject($subject, $request->validated());
+        }
+        return redirect()->route('admin.subjects.index')->with('message', 'Subject updated successfully');
     }
 
     /**

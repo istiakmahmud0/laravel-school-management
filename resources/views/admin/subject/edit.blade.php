@@ -29,7 +29,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="" method="POST">
+                            <form action="{{ route('admin.subjects.update', $subject->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -37,7 +37,7 @@
                                         <label for="subject_name">Name</label>
                                         <input type="text" class="form-control" id="subject_name" name="subject_name"
                                             placeholder="Enter name" value="{{ $subject->subject_name }}">
-                                        <x-alert name='name' />
+                                        <x-alert name='subject_name' />
                                     </div>
                                     <div class="form-group">
                                         <label for="subject_type">Subject Type</label>
@@ -51,22 +51,22 @@
                                                 Practical
                                             </option>
                                         </select>
-                                        <x-alert name='status' />
+                                        <x-alert name='subject_type' />
                                     </div>
                                     <div class="form-group">
                                         <label for="subject_status">Status</label>
-                                        <select class="form-control" id="subject_status" name="status">
+                                        <select class="form-control" id="subject_status" name="subject_status">
                                             <option value="1"
                                                 {{ $subject->subject_status == '1' ? 'selected' : '' }}>
                                                 Active
-                                            </option>
                                             </option>
                                             <option value="0"
                                                 {{ $subject->subject_status == '0' ? 'selected' : '' }}>
                                                 Inactive
                                             </option>
                                         </select>
-                                        <x-alert name='status' />
+
+                                        <x-alert name='subject_status' />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
