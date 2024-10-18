@@ -38,6 +38,26 @@
                                             placeholder="Enter name" value="{{ old('name') }}">
                                         <x-alert name='name' />
                                     </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label>Subjects</label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                name="">
+                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                name="">
+                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                name="">
+                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        </div>
+                                    </div>
                                     {{-- Added roles --}}
                                     <div class="form-group">
                                         <label for="status">Status</label>
