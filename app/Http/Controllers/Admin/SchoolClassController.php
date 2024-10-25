@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SchoolClassRequest;
 use App\Interfaces\SchoolClassRepositoryInterface;
+use App\Interfaces\SubjectRepositoryInterface;
 use App\Models\SchoolClass;
+use App\Repositories\SubjectRepository;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -15,9 +17,10 @@ class SchoolClassController extends Controller
      * School class controller constructor
      */
 
-    public function __construct(protected SchoolClassRepositoryInterface $schoolClassRepository)
+    public function __construct(protected SchoolClassRepositoryInterface $schoolClassRepository, protected SubjectRepositoryInterface $subjectRepository)
     {
         $this->schoolClassRepository = $schoolClassRepository;
+        $this->subjectRepository = $subjectRepository;
     }
 
     /**
@@ -34,7 +37,8 @@ class SchoolClassController extends Controller
      */
     public function create()
     {
-        return view('admin.school-class.create');
+        $subjects = $this->subjectRepository->getAllSubjects();
+        return view('admin.school-class.create', ['subjects' => $subjects]);
     }
 
     /**
@@ -42,7 +46,10 @@ class SchoolClassController extends Controller
      */
     public function store(SchoolClassRequest $request)
     {
-        $this->schoolClassRepository->createSchoolClass($request->validated());
+        $class = $this->schoolClassRepository->createSchoolClass($request->validated());
+        if ($request->has('subjects')) {
+            $class->subjects()->attach($request->subjects);
+        }
         return redirect()->route('admin.schoolClass.index')->with('message', 'Class created successfully');
     }
 

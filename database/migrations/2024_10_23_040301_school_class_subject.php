@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('school_class_subject', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('airline');
-            $table->timestamps();
+            $table->foreignId('school_class_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('subject_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

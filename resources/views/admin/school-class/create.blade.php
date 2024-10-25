@@ -42,23 +42,16 @@
                                         <div>
                                             <label>Subjects</label>
                                         </div>
+                                        @foreach ($subjects as $subject)
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                                name="">
-                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            <input type="checkbox" class="form-check-input" id="subject_{{ $subject->id }}"
+                                                name="subjects[]" @if(is_array(old('subjects')) && in_array($subject->id, old('subjects'))) checked @endif value="{{$subject->id}}">
+                                                <label for="subject_{{ $subject->id }}">{{ $subject->subject_name }}</label>
                                         </div>
-                                        <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                                name="">
-                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                        </div>
-                                        <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                                name="">
-                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                        </div>
+                                        @endforeach
+                                        <x-alert name='subjects' />
                                     </div>
-                                    {{-- Added roles --}}
+                                    {{-- Added status --}}
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">
