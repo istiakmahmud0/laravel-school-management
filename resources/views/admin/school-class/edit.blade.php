@@ -39,7 +39,21 @@
                                             placeholder="Enter name" value="{{ $sc->name }}">
                                         <x-alert name='name' />
                                     </div>
-                                    {{-- Added roles --}}
+                                    {{-- Added subjects --}}
+                                    <div class="form-group">
+                                        <div>
+                                            <label>Subjects</label>
+                                        </div>
+                                        @foreach ($sc->subjects as $subject)
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="subject_{{ $subject->id }}"
+                                                name="subjects[]" @if(is_array('subjects') && in_array($subject->id, 'subjects')) checked @endif value="{{$subject->id}}">
+                                                <label for="subject_{{ $subject->id }}">{{ $subject->subject_name }}</label>
+                                        </div>
+                                        @endforeach
+                                        <x-alert name='subjects' />
+                                    {{-- Added status
+                                     --}}
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status">

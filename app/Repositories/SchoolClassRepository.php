@@ -19,9 +19,11 @@ class SchoolClassRepository implements SchoolClassRepositoryInterface
     /**
      * Get all school class data
      */
-    public function getAllSchoolClass(): Collection
+    public function getAllSchoolClass(?array $relationships = []): Collection
     {
-        return $this->model::all();
+        return $this->model::when($relationships, function ($query) use ($relationships) {
+            $query->with($relationships);
+        })->get();
     }
 
     /**
@@ -35,10 +37,13 @@ class SchoolClassRepository implements SchoolClassRepositoryInterface
     /**
      * Get school class by id
      */
-    public function getSchoolClassById(string $id): SchoolClass
+    public function getSchoolClassById(string $id, ?array $relationships = []): SchoolClass
     {
         $sc = $this->model->query();
-        return $sc->findOrFail($id);
+        return $sc->when($relationships, function ($query) use ($relationships) {
+            $query->with($relationships);
+        })->findOrFail($id);
+        // return $sc->findOrFail($id);
     }
 
     /**

@@ -11,7 +11,7 @@ interface SchoolClassRepositoryInterface
     /**
      * Get all school class data
      */
-    public function getAllSchoolClass(): Collection;
+    public function getAllSchoolClass(?array $relationships = []): Collection;
 
 
 
@@ -24,7 +24,7 @@ interface SchoolClassRepositoryInterface
      * Get school class by id
      */
 
-    public function getSchoolClassById(string $id): SchoolClass;
+    public function getSchoolClassById(string $id, ?array $relationships = []): SchoolClass;
 
     /**
      * Update post

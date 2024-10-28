@@ -39,6 +39,7 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>Name</th>
+                                            <th>Subjects</th>
                                             <th>status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -49,6 +50,13 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     {{ $sc->name }}
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        @foreach ($sc->subjects as $subject)
+                                                         <div>{{$subject->subject_name}}</div>
+                                                        @endforeach
+                                                    </div>
                                                 </td>
                                                 <td>{{ $sc->status == 1 ? 'Active' : 'Inactive' }}
                                                 </td>
