@@ -44,10 +44,12 @@
                                         <div>
                                             <label>Subjects</label>
                                         </div>
-                                        @foreach ($sc->subjects as $subject)
+                                        @foreach ($subjects as $subject)
                                         <div class="form-group form-check">
                                             <input type="checkbox" class="form-check-input" id="subject_{{ $subject->id }}"
-                                                name="subjects[]" @if(is_array('subjects') && in_array($subject->id, 'subjects')) checked @endif value="{{$subject->id}}">
+                                                name="subjects[]" value="{{$subject->id}}" @if (in_array($subject->id,$selectedSubjectsIds))
+                                                  checked
+                                                @endif>
                                                 <label for="subject_{{ $subject->id }}">{{ $subject->subject_name }}</label>
                                         </div>
                                         @endforeach

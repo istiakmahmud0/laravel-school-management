@@ -25,7 +25,7 @@ class SchoolClassRequest extends FormRequest
         return [
             // 'name' => ['required', 'string', 'unique:school_classes,name'],
             'name' => ['required', 'string', Rule::unique('school_classes')->ignore($this->route('school_class'))],
-            'subjects' => ['required', 'array'],
+            'subjects' => $this->isMethod('post') ? ['required', 'array'] : ['nullable', 'array'],
             'status' => ['required', 'boolean']
         ];
     }

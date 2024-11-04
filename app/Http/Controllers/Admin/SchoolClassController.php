@@ -59,8 +59,10 @@ class SchoolClassController extends Controller
      */
     public function edit(string $id)
     {
+        $subjects = $this->subjectRepository->getAllSubjects();
         $sc = $this->schoolClassRepository->getSchoolClassById($id);
-        return view('admin.school-class.edit', ['sc' => $sc]);
+        $selectedSubjectsIds = $sc?->subjects->pluck('id')->toArray();
+        return view('admin.school-class.edit', ['sc' => $sc, 'subjects' => $subjects, 'selectedSubjectsIds' => $selectedSubjectsIds]);
     }
 
     /**
@@ -72,6 +74,9 @@ class SchoolClassController extends Controller
         if ($sc instanceof SchoolClass) {
             $this->schoolClassRepository->updatePost($sc, $request->validated());
         }
+        // if ($request->has('subjects')) {
+        $sc->subjects()->sync($request->subjects);
+        // }
         return redirect(route('admin.schoolClass.index'))->with('message', 'School class updated successfully');
     }
 
@@ -81,6 +86,7 @@ class SchoolClassController extends Controller
     public function destroy(string $id)
     {
         $sc = $this->schoolClassRepository->getSchoolClassById($id);
+        $sc->subjects()->detach();
         if ($sc instanceof SchoolClass) {
             $this->schoolClassRepository->deletePost($sc);
         }
