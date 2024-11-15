@@ -15,6 +15,21 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            // Student
+            $table->string('admission_number')->nullable();
+            $table->string('roll_number')->nullable();
+            $table->foreignId('school_class_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('gender')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->date('admission_date')->nullable();
+            $table->string('profile_pic')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('status')->nullable();
+            // End student
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
