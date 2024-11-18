@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             // Student
             $table->string('admission_number')->nullable();
-            $table->string('roll_number')->nullable();
-            $table->foreignId('school_class_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('roll_number')->unique()->nullable();
+            $table->foreignId('school_class_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('gender')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('religion')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('blood_group')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
-            $table->string('status')->nullable();
+            $table->boolean('status')->nullable();
             // End student
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
