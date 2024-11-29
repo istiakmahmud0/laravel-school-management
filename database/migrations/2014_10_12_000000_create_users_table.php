@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->string('mobile_number')->nullable();
             $table->date('admission_date')->nullable();
-            $table->string('profile_pic')->nullable();
+            // $table->string('profile_pic')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
