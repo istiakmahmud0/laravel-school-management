@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject_name');
@@ -18,6 +20,7 @@ return new class extends Migration
             $table->boolean('subject_status');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('school_class_subject', function (Blueprint $table) {
             $table->id();
             $table->foreignId('school_class_id')
@@ -22,6 +24,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
