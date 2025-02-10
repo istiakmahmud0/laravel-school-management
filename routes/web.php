@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SchoolClassController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
@@ -59,6 +60,10 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
      * Subject
      */
     Route::resource('subject', SubjectController::class)->names('admin.subjects');
+    /**
+     * Student
+     */
+    Route::resource('student', StudentController::class)->names('admin.student');
 });
 
 Route::middleware('auth')->group(function () {
