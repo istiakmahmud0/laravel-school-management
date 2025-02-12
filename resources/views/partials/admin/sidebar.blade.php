@@ -83,6 +83,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.students.index') }}"
+                            class="nav-link {{ Route::is('admin.students.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Students
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.schoolClass.index') }}"
                             class="nav-link {{ Route::is('admin.schoolClass.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-th"></i>

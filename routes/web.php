@@ -46,6 +46,7 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
     Route::delete('users/{user}/permissions/{permission}', [UserController::class, 'removePermissionFromUser'])->name('admin.user.remove.permission');
     // Update the admin password
     Route::post('/admin/password/update/{userId}', [UserController::class, 'updateUserPassword'])->name('admin.updatePassword');
+
     /**
      * User profile update
      */
@@ -63,7 +64,7 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
     /**
      * Student
      */
-    Route::resource('student', StudentController::class)->names('admin.student');
+    Route::resource('student', StudentController::class)->names('admin.students');
 });
 
 Route::middleware('auth')->group(function () {
