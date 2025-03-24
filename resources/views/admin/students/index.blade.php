@@ -1,1 +1,3 @@
-<h1>Students index page . </h1>
+<x-admin-layout>
+    <x-slot name="siteTitle">Students</x-slot>
+</x-admin-layout>
