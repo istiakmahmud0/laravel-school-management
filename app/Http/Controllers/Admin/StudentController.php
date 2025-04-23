@@ -11,4 +11,8 @@ class StudentController extends Controller
     {
         return view('admin.students.index');
     }
+    public function create()
+    {
+        return view('admin.students.create');
+    }
 }
