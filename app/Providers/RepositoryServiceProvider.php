@@ -12,10 +12,11 @@ use App\Models\SchoolClass;
 use App\Repositories\PermissionRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\SchoolClassRepository;
+use App\Repositories\StudentRepository;
 use App\Repositories\SubjectRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
-use StudentRepository;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {

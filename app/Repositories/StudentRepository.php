@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Interfaces\StudentRepositoryInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;

@@ -8,10 +8,12 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admission_number',
+        'roll_number',
+        'school_class_id',
+        'gender',
+        'date_of_birth',
+        'religion',
+        'mobile_number',
+        'admission_date',
+        'blood_group',
+        'height',
+        'weight',
+        'status',
     ];
 
     /**
