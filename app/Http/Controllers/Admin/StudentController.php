@@ -22,6 +22,9 @@ class StudentController extends Controller
 
     public function index()
     {
+        $students = $this->studentRepository->getAll(null, ['schoolClass', 'media']);
+        dd($students);
+
         return view('admin.students.index');
     }
     public function create()

@@ -15,7 +15,10 @@ class StudentRepository implements StudentRepositoryInterface
     }
     public function getAll(?int $limit, ?array $relationNames): Collection
     {
-        return $this->model->with($relationNames)->get();
+        // return $this->model->with($relationNames)->get();
+        return $this->model->when($limit, function ($query) use ($limit) {
+            return $query->limit($limit);
+        })->with($relationNames)->get();
     }
 
     public function findById(string $id, array|null $relationNames): User|null
