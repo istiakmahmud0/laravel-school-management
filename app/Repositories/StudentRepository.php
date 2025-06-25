@@ -16,9 +16,10 @@ class StudentRepository implements StudentRepositoryInterface
     public function getAll(?int $limit, ?array $relationNames): Collection
     {
         // return $this->model->with($relationNames)->get();
-        return $this->model->when($limit, function ($query) use ($limit) {
-            return $query->limit($limit);
-        })->with($relationNames)->get();
+        return $this->model->role('student')
+            ->when($limit, function ($query) use ($limit) {
+                return $query->limit($limit);
+            })->with($relationNames)->get();
     }
 
     public function findById(string $id, array|null $relationNames): User|null
@@ -28,7 +29,7 @@ class StudentRepository implements StudentRepositoryInterface
 
     public function store(array $details): User
     {
-        return $this->model->create($details);
+        return $this->model->create($details)->assignRole(['student']);;
     }
 
     public function update(Model $model, array $newDetails): bool
