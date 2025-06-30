@@ -39,40 +39,40 @@
                                         <tr>
                                             <th>Serial</th>
                                             <th>Name</th>
-                                            <th>Subjects</th>
-                                            <th>status</th>
+                                            <th>Email</th>
+                                            <th>Created Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                Name
-                                            </td>
-                                            <td>
-                                                <div>
+                                        @foreach ($students as $student)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    {{ $student->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $student->email }}
+                                                </td>
+                                                <td>
+                                                    {{ $student->created_at->format('d M Y') }}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <span class="mr-2">
+                                                        <a href="" class="btn btn-primary">Edit</a>
+                                                    </span>
+                                                    <span>
+                                                        <form method="POST" action="">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" type="submit"
+                                                                onclick="return confirm('Are you sure ?')">Delete</button>
+                                                        </form>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                                    <div>subject_name</div>
-
-                                                </div>
-                                            </td>
-                                            <td>Active/Inactive
-                                            </td>
-                                            <td class="d-flex">
-                                                <span class="mr-2">
-                                                    <a href="" class="btn btn-primary">Edit</a>
-                                                </span>
-                                                <span>
-                                                    <form method="POST" action="">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger" type="submit"
-                                                            onclick="return confirm('Are you sure ?')">Delete</button>
-                                                    </form>
-                                                </span>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
