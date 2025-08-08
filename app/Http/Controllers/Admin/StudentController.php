@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
 use App\Interfaces\SchoolClassRepositoryInterface;
 use App\Interfaces\StudentRepositoryInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -40,6 +41,23 @@ class StudentController extends Controller
             $student->addMediaFromRequest('profile_pic')
                 ->toMediaCollection('profile_pics');
         }
-        return redirect()->route('admin.students.index')->with('success', 'Student created successfully');
+        return redirect()->route('admin.students.index')->with('message', 'Student created successfully');
+    }
+
+    public function edit(string $id)
+    {
+        $student = $this->studentRepository->findById($id, ['schoolClass', 'media']);
+        $classList = $this->schoolClassRepository->getAllSchoolClass(['subjects']);
+        return view('admin.students.edit', ['student' => $student, 'classList' => $classList]);
+    }
+
+    public function destroy(string $id)
+    {
+        $student = $this->studentRepository->findById($id, ['schoolClass', 'media']);
+        if ($student instanceof User) {
+            $this->studentRepository->delete($student);
+        }
+
+        return redirect()->route('admin.students.index')->with('message', 'Student deleted successfully');
     }
 }

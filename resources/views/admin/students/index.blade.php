@@ -45,33 +45,42 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($students as $student)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    {{ $student->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $student->email }}
-                                                </td>
-                                                <td>
-                                                    {{ $student->created_at->format('d M Y') }}
-                                                </td>
-                                                <td class="d-flex">
-                                                    <span class="mr-2">
-                                                        <a href="" class="btn btn-primary">Edit</a>
-                                                    </span>
-                                                    <span>
-                                                        <form method="POST" action="">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger" type="submit"
-                                                                onclick="return confirm('Are you sure ?')">Delete</button>
-                                                        </form>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @if (count($students) > 0)
+                                            @foreach ($students as $student)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>
+                                                        {{ $student->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $student->email }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $student->created_at->format('d M Y') }}
+                                                    </td>
+                                                    <td class="d-flex">
+                                                        <span class="mr-2">
+                                                            <a href="{{ route('admin.students.edit', $student->id) }}"
+                                                                class="btn btn-primary">Edit</a>
+                                                        </span>
+                                                        <span>
+                                                            <form method="POST"
+                                                                action="{{ route('admin.students.destroy', $student->id) }}">
+                                                                {{-- Use the @csrf directive to include a CSRF token --}}
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button class="btn btn-danger" type="submit"
+                                                                    onclick="return confirm('Are you sure ?')">Delete</button>
+                                                            </form>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <div>
+                                                <h3 class="text-center">No students found</h3>
+                                            </div>
+                                        @endif
 
                                     </tbody>
                                 </table>
