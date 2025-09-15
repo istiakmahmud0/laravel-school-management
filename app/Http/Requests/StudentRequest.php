@@ -21,11 +21,9 @@ class StudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => 'required_with:password|same:password|min:6',
             'admission_number' => ['required', 'string'],
             'roll_number' => ['required', 'string'],
             'school_class_id' => ['required', 'string'],
@@ -40,5 +38,18 @@ class StudentRequest extends FormRequest
             'status' => ['required', 'string'],
             'profile_pic' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
+
+        // Password validation: required for create, optional for update
+        if ($this->isMethod('post')) {
+            // Creating new student - password is required
+            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
+            $rules['password_confirmation'] = 'required_with:password|same:password|min:8';
+        } else {
+            // Updating existing student - password is optional
+            $rules['password'] = ['nullable', 'string', 'min:8', 'confirmed'];
+            $rules['password_confirmation'] = 'required_with:password|same:password|min:8';
+        }
+
+        return $rules;
     }
 }

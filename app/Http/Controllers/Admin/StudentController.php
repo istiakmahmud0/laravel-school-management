@@ -39,7 +39,7 @@ class StudentController extends Controller
         $student = $this->studentRepository->store($request->validated());
         if ($request->hasFile('profile_pic')) {
             $student->addMediaFromRequest('profile_pic')
-                ->toMediaCollection('profile_pics');
+                ->toMediaCollection('profile_pic');
         }
         return redirect()->route('admin.students.index')->with('message', 'Student created successfully');
     }
@@ -49,6 +49,23 @@ class StudentController extends Controller
         $student = $this->studentRepository->findById($id, ['schoolClass', 'media']);
         $classList = $this->schoolClassRepository->getAllSchoolClass(['subjects']);
         return view('admin.students.edit', ['student' => $student, 'classList' => $classList]);
+    }
+
+    public function update(StudentRequest $request, string $id)
+    {
+        $student = $this->studentRepository->findById($id, ['schoolClass', 'media']);
+        if ($student instanceof User) {
+            $this->studentRepository->update($student, $request->validated());
+        }
+        if ($request->hasFile('profile_pic')) {
+            // Delete the current profile picture if it exists
+            $student->clearMediaCollection('profile_pic');
+
+            // Add the new profile picture
+            $student->addMediaFromRequest('profile_pic')
+                ->toMediaCollection('profile_pic');
+        }
+        return redirect()->route('admin.students.index')->with('message', 'Student Updated successfully');
     }
 
     public function destroy(string $id)
