@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ParentController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\RoleController;
@@ -64,6 +65,8 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth']], function 
      * Student
      */
     Route::resource('student', StudentController::class)->names('admin.students');
+
+    Route::resource('parent', ParentController::class)->names('admin.parants');
 });
 
 Route::middleware('auth')->group(function () {
